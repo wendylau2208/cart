@@ -5,10 +5,18 @@
  */
 package com.cart.service;
 
+import com.cart.object.Cart;
+import java.util.List;
+import java.util.Map;
+
 /**
  *
  * @author wendy
  */
 public interface CartService {
-    
+    public void add(String name, int count);
+    public void delete(String name);
+    public Map<String,Integer> showAll();
+    public List<Cart>getAll();
+    public Cart findByName(String name);
 }
