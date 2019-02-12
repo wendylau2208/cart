@@ -8,6 +8,7 @@ package com.cart.service.impl;
 import com.cart.object.Cart;
 import com.cart.service.CartService;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,17 +26,36 @@ public class CartServiceImpl implements CartService{
     
     @Override
     public void add(String name, int count) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Cart cart = new Cart(name, count);
+        boolean flagDuplicate = false;
+        for(int i=0; i<listCart.size();i++){
+            if(listCart.get(i).getName().equals(name)){
+                cart.setCount(listCart.get(i).getCount()+count);
+                listCart.set(i, cart);
+                flagDuplicate = true;
+            }
+        }
+        if(!flagDuplicate){
+            listCart.add(cart);
+        }
     }
 
     @Override
     public void delete(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for(int i=0; i<listCart.size();i++){
+            if(listCart.get(i).getName().equals(name)){
+                listCart.remove(i);
+            }
+        }
     }
 
     @Override
     public Map<String, Integer> showAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Map<String, Integer> result = new HashMap<String, Integer>();
+        for(Cart cart : listCart){
+            result.put(cart.getName(), cart.getCount());
+        }
+        return result;
     }
 
     @Override
@@ -45,9 +65,12 @@ public class CartServiceImpl implements CartService{
 
     @Override
     public Cart findByName(String name) {
-        Cart cart = null;
-        
-        return cart;
+        for(Cart cart : listCart){
+            if(cart.getName().equals(name)){
+                return cart;
+            }
+        }
+        return null;
     }
     
 }

@@ -48,9 +48,9 @@ public class CartServiceTest {
         Cart objTopi = service.findByName("Topi Putih");
         Cart objKemeja = service.findByName("Kemeja Hitam");
         
-        assertEquals(3,objKemeja.getCount());
+        assertEquals(1,objKemeja.getCount());
         assertEquals(1,objTopi.getCount());
-        assertEquals(1,objSepatu.getCount());
+        assertEquals(3,objSepatu.getCount());
     }
     
     @Test
